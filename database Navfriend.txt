@@ -18,7 +18,7 @@ email varchar (50),
 password varchar (15),
 codice_viaggio int(6),
 codice_amico int (6),
-foreign key (codice_viaggio) references Viaggio(codice_viaggio)
+foreign key (codice_viaggio) references Viaggio(codice_viaggio),
 foreign key (codice_amico) references Utente(codice_utente)
 );
 
