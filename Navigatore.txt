@@ -1,0 +1,35 @@
+- Punti di lavoro :
+				Punti essenziali :
+								- A) Client :
+											- 1) Ottenimento delle coordinate gps ;
+											- 2) Trasmissione dati da remoto al server ;
+											- 3) Ricezione dei dati ;
+											- 4) Account ;
+								
+								- B) Server :
+											- 1) Ricezione dati ;
+											- 2) Trasmissione dei dati ;
+											- 3) Storage dei dati ;
+											- 4) Gestione account ;
+											
+											
+								- C) Gestione della sessione di viaggio ;
+								
+								
+				Punti non essenziali : 
+								- A) Client :
+											- 1) Chat ;
+											- 2) Visualizzazione da browser ;
+								- B) Server :
+											- 1) Maschera di controllo ;
+											- 2) Gestione della chat ;
+- Sicurezza :
+								- A) Trasmissione dei dati tramite protocollo Https;
+								
+
+- Casi d'uso :
+								- A) Registrazione nuovo account ;
+								- B) Inizio nuova sessione di viaggio ;
+								- C) Invio e ricezione informazioni sulla posizione ;
+								- D) Sincronizzazione del percorso impostato ;
+								- E) 

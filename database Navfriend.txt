@@ -1,0 +1,35 @@
+create database Navfriend;
+
+use Navfriend;
+
+
+create table Viaggio (
+codice_viaggio int(6) AUTO_INCREMENT not null primary key,
+data datetime, 
+destinazione varchar (50)
+);
+
+
+create table Utente(
+codice_utente int(6) AUTO_INCREMENT not null primary key,
+nome varchar (20),
+cognome varchar (20),
+email varchar (50),
+password varchar (15),
+codice_viaggio int(6),
+codice_amico int (6),
+foreign key (codice_viaggio) references Viaggio(codice_viaggio)
+foreign key (codice_amico) references Utente(codice_utente)
+);
+
+create table Posizione(
+codice_posizione int(6) AUTO_INCREMENT not null primary key,
+latitudine double (6,3),
+longitudine double (6,3),
+istante datetime,
+codice_viaggio int (6),
+foreign key (codice_viaggio) references Viaggio(codice_viaggio)
+);
+
+
+
