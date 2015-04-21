@@ -22,9 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'org.restlet.jse:org.restlet:2.3.1'
-    compile files('lib/org.restlet.ext.gson.jar')
-    compile files('lib/org.restlet.ext.httpclient.jar')
-    compile files('lib/org.restlet.ext.json.jar')
-    compile files('lib/org.restlet.jar')
+    compile 'us.monoid.web:resty:0.3.2'
 }
