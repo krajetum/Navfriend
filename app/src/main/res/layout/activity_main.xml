@@ -16,7 +16,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Invia"
         android:id="@+id/submit"
         android:layout_marginBottom="62dp"
         android:layout_alignParentBottom="true"
@@ -30,7 +30,8 @@
         android:id="@+id/email"
         android:layout_marginTop="45dp"
         android:layout_below="@+id/value"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="example1@example.com" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
         android:id="@+id/pwd"
         android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp" />
+        android:layout_marginTop="105dp"
+        android:text="pass" />
 
 </RelativeLayout>

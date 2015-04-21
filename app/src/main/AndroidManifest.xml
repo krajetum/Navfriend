@@ -8,10 +8,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
         <activity
             android:name=".Main"
             android:label="@string/app_name" >
@@ -22,5 +18,8 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

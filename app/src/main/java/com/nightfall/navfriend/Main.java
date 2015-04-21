@@ -8,33 +8,44 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.nightfall.navfriend.data.User;
+
+import java.io.IOException;
+
+import us.monoid.web.Resty;
+
+import static us.monoid.web.Resty.data;
+import static us.monoid.web.Resty.form;
 
 public class Main extends ActionBarActivity {
 
 
-
+private  EditText emailText;
+private  EditText pwdText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-
-
-
-
         Button button = (Button) findViewById(R.id.submit);
-
+        emailText = (EditText) findViewById(R.id.email) ;
+        pwdText = (EditText) findViewById(R.id.pwd);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText emailText = (EditText) v.findViewById(R.id.email) ;
-                EditText pwdText = (EditText) v.findViewById(R.id.pwd) ;
+                System.out.println(emailText);
+                System.out.println(pwdText);
 
                 String email = emailText.getText().toString();
                 String pwd = pwdText.getText().toString();
 
+                User utente=new User(email,pwd);
+
+                LogInConnection conn=new LogInConnection(utente);
+
+                Thread t=new Thread(conn);
+                t.start();
             }
         });
 
