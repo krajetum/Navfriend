@@ -42,7 +42,7 @@ private  EditText pwdText;
 
                 User utente=new User(email,pwd);
 
-                LogInConnection conn=new LogInConnection(utente);
+                LogInConnection conn=new LogInConnection(utente, Main.this);
 
                 Thread t=new Thread(conn);
                 t.start();
