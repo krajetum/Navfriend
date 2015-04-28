@@ -8,11 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.nightfall.navfriend.async.LogInConnection;
 import com.nightfall.navfriend.data.User;
-
-import java.io.IOException;
-
-import us.monoid.web.Resty;
 
 import static us.monoid.web.Resty.data;
 import static us.monoid.web.Resty.form;
@@ -42,10 +39,9 @@ private  EditText pwdText;
 
                 User utente=new User(email,pwd);
 
-                LogInConnection conn=new LogInConnection(utente, Main.this);
+                LogInConnection connection = new LogInConnection(utente, Main.this);
+                connection.execute();
 
-                Thread t=new Thread(conn);
-                t.start();
             }
         });
 
