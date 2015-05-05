@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nightfall.navfriend.CreateTravel;
+import com.nightfall.navfriend.FriendSelector;
 import com.nightfall.navfriend.Main;
 import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.User;
@@ -56,7 +57,7 @@ public class LogInConnection extends AsyncTask<Void, Void, RequestSuccess>/*impl
             String json = new Gson().toJson(user);
             Log.i("JSON", "effettuando la richiesta..." + json);
             Resty rest=new Resty();
-            JSONResource resource = rest.json("http://192.168.201.111:8182/login", put(content(json)));
+            JSONResource resource = rest.json("http://192.168.201.116:8182/login", put(content(json)));
             System.out.println(resource.toObject().toString());
             success = new Gson().fromJson(resource.toObject().toString(), RequestSuccess.class);
 
@@ -86,6 +87,8 @@ public class LogInConnection extends AsyncTask<Void, Void, RequestSuccess>/*impl
 
         if(success.isStatus()){
             Intent intent = new Intent(activity, CreateTravel.class);
+            //Intent intent = new Intent(activity, FriendSelector.class);
+
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", user);
             intent.putExtras(bundle);

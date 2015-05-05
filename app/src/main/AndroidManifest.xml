@@ -2,11 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nightfall.navfriend" >
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +24,10 @@
         <activity
             android:name=".CreateTravel"
             android:label="@string/title_activity_create_travel" >
+        </activity>
+        <activity
+            android:name=".FriendSelector"
+            android:label="@string/title_activity_friend_selector" >
         </activity>
     </application>
 

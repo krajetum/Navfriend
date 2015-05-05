@@ -1,8 +1,5 @@
 package com.nightfall.navfriend.data;
 
-/**
- * Created by Dev on 21/04/2015.
- */
 public class RequestSuccess {
 
     private boolean status;

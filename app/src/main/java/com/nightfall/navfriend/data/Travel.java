@@ -1,6 +1,7 @@
 package com.nightfall.navfriend.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +16,14 @@ public class Travel implements Serializable {
     private List<User> guest;
 
     public Travel(String owner, String descrizione, Coordinates destinazione){
+        guest = new ArrayList<>();
         this.owner = owner;
         this.descrizione = descrizione;
         this.destinazione = destinazione;
     }
 
     public Travel(String owner, Coordinates destinazione){
+        guest = new ArrayList<>();
         this.owner = owner;
         this.destinazione = destinazione;
     }
@@ -72,5 +75,19 @@ public class Travel implements Serializable {
 
     public void setGuest(List<User> guest) {
         this.guest = guest;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("/***********************************/\n");
+        builder.append("/* ID: "+this.ID+" */\n");
+        builder.append("/* Owner: "+this.owner+" */\n");
+        builder.append("/* Descrizione: "+this.descrizione+" */\n");
+        for(User user : guest){
+            builder.append("/* USER:"+user.getEmail()+" */\n");
+        }
+        builder.append("/***********************************/\n");
+        return builder.toString();
     }
 }

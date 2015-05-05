@@ -2,10 +2,16 @@ package com.nightfall.navfriend.async;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.nightfall.navfriend.CreateTravel;
+import com.nightfall.navfriend.FriendSelector;
 import com.nightfall.navfriend.data.Coordinates;
 import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.TrasferTravel;
@@ -13,6 +19,7 @@ import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import us.monoid.json.JSONException;
@@ -63,18 +70,22 @@ public class OriginTravel extends AsyncTask<Void, Void, Travel> {
             String json = new Gson().toJson(trasferTravel);
 
             Resty rest=new Resty();
-            JSONResource resource = rest.json("http://192.168.201.111:8182/newtravel", put(content(json)));
+            JSONResource resource = rest.json("http://192.168.201.116:8182/newtravel", put(content(json)));
             System.out.println(resource.toObject().toString());
             travel = new Gson().fromJson(resource.toObject().toString(), Travel.class);
 
             System.out.println("richiesta effettuata");
 
+            System.out.println(travel.toString());
+
             return travel;
 
 
         } catch (IOException e) {
+
             e.printStackTrace();
         }catch (JSONException e){
+
             e.printStackTrace();
         }
         return null;
@@ -84,14 +95,17 @@ public class OriginTravel extends AsyncTask<Void, Void, Travel> {
 
     @Override
     protected void onPostExecute(Travel travel) {
-        Log.i("SUCCESS", travel.getOwner());
-        Log.i("SUCCESS", travel.getDescrizione());
 
-        List<User> user = travel.getGuest();
 
-        for(User u : user){
-            Log.println(Log.ASSERT,"SUCCESS" ,u.getEmail());
-        }
+        //Intent intent = new Intent(activity, CreateTravel.class);
+        Intent intent = new Intent(activity, FriendSelector.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("travel", travel);
+        bundle.putSerializable("user", user);
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
+
+
 
         if (dialog.isShowing()) {
             dialog.dismiss();

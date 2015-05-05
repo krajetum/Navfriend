@@ -1,9 +1,11 @@
 package com.nightfall.navfriend.data;
 
+import java.io.Serializable;
+
 /**
  * Created by Dev on 28/04/2015.
  */
-public class Coordinates {
+public class Coordinates implements Serializable {
 
     private double longitude;
     private double latitude;
