@@ -63,6 +63,8 @@ public class FriendSelector extends ActionBarActivity {
                 }
 
                 Travel apptravel = new Travel(travel.getOwner(), travel.getDescrizione(), travel.getDestinazione());
+                apptravel.setID(travel.getID());
+
                 for(User appUser : users)
                     apptravel.addUser(appUser);
 
