@@ -38,13 +38,13 @@ public class CreateTravel extends ActionBarActivity {
         Geocoder geocoder = new Geocoder(this);
         List<Address> addresses = null;
         coordinates = null;
-        double latitude;
-        double longitude;
+        float latitude;
+        float longitude;
         try {
             addresses = geocoder.getFromLocationName(dest.getText().toString(), 1);
             if (addresses.size() > 0) {
-                latitude = addresses.get(0).getLatitude();
-                longitude = addresses.get(0).getLongitude();
+                latitude = new Float(addresses.get(0).getLatitude());
+                longitude = new Float(addresses.get(0).getLongitude());
                 coordinates = new Coordinates(longitude, latitude);
             } else {
                 coordinates = new Coordinates(0, 0);
@@ -53,7 +53,7 @@ public class CreateTravel extends ActionBarActivity {
             ex.printStackTrace();
         }
 
-        next.setOnClickListener(new View.OnClickListener() {
+            next.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                 new OriginTravel(CreateTravel.this, user, descr.getText().toString(), coordinates).execute();

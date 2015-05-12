@@ -1,5 +1,6 @@
 package com.nightfall.navfriend;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class FriendSelector extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_selector);
+        Button next=(Button) findViewById(R.id.FriendListSelector_Avanti);
 
         final Travel travel = (Travel) getIntent().getSerializableExtra("travel");
 
@@ -76,6 +78,13 @@ public class FriendSelector extends ActionBarActivity {
             }
         });
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent q = new Intent(FriendSelector.this , TestAct.class);
+               startActivity(q);
+            }
+        });
     }
 
 
