@@ -1,6 +1,6 @@
 package com.nightfall.navfriend;
 
-import android.content.Intent;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +25,7 @@ public class TestAct extends ActionBarActivity {
 
         final Travel travel= (Travel) getIntent().getSerializableExtra("travel");
         final User user= (User) getIntent().getSerializableExtra("user");
+        /*
         final EditText lat= (EditText) findViewById(R.id.lat);
         final EditText lon= (EditText) findViewById(R.id.lon);
 
@@ -40,6 +41,11 @@ public class TestAct extends ActionBarActivity {
                                     travel));
                 }
             });
+        */
+        
+
+
+
     }
 
 

@@ -9,4 +9,6 @@
     <string name="title_activity_start_maps">Map</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_test">TestAct</string>
+    <string name="title_activity_menu">menu</string>
+    <string name="title_activity_map_navfriend">Map</string>
 </resources>

@@ -1,10 +1,13 @@
 package com.nightfall.navfriend.async;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.nightfall.navfriend.MapNavfriend;
 import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
@@ -22,20 +25,17 @@ import us.monoid.web.Resty;
 import static us.monoid.web.Resty.content;
 import static us.monoid.web.Resty.put;
 
-/**
- * Created by Dev on 05/05/2015.
- */
 public class AddUserToTravel extends AsyncTask<UserTravel, Void, RequestSuccess> {
 
     Activity activity;
-
+    UserTravel travel;
     public AddUserToTravel(Activity activity) {
         this.activity = activity;
     }
 
     @Override
     protected RequestSuccess doInBackground(UserTravel... params) {
-        UserTravel travel = params[0];
+        travel = params[0];
 
 
 
@@ -64,8 +64,15 @@ public class AddUserToTravel extends AsyncTask<UserTravel, Void, RequestSuccess>
 
     @Override
     protected void onPostExecute(RequestSuccess success) {
+
+
         if(success.isStatus()){
-            Toast.makeText(activity, "SURCESS", Toast.LENGTH_LONG);
+            Intent q = new Intent(activity , MapNavfriend.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", travel.getUser());
+            bundle.putSerializable("travel", travel.getTravel());
+            q.putExtras(bundle);
+            activity.startActivity(q);
         }else{
             Toast.makeText(activity, "SOTTERCESS", Toast.LENGTH_LONG);
         }

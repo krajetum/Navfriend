@@ -11,9 +11,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.nightfall.navfriend.CreateTravel;
-import com.nightfall.navfriend.FriendSelector;
 import com.nightfall.navfriend.Main;
+import com.nightfall.navfriend.menu;
 import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.User;
 import java.io.IOException;
@@ -86,7 +85,7 @@ public class LogInConnection extends AsyncTask<Void, Void, RequestSuccess>/*impl
         }
 
         if(success.isStatus()){
-            Intent intent = new Intent(activity, CreateTravel.class);
+            Intent intent = new Intent(activity, menu.class);
             //Intent intent = new Intent(activity, FriendSelector.class);
 
             Bundle bundle = new Bundle();

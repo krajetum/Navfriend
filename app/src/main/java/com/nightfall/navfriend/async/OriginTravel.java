@@ -2,25 +2,18 @@ package com.nightfall.navfriend.async;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.nightfall.navfriend.CreateTravel;
 import com.nightfall.navfriend.FriendSelector;
 import com.nightfall.navfriend.data.Coordinates;
-import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.TrasferTravel;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import us.monoid.json.JSONException;
 import us.monoid.web.JSONResource;
@@ -30,11 +23,7 @@ import static us.monoid.web.Resty.content;
 import static us.monoid.web.Resty.data;
 import static us.monoid.web.Resty.form;
 import static us.monoid.web.Resty.*;
-import us.monoid.web.Resty.*;
 
-/**
- * Created by Dev on 28/04/2015.
- */
 public class OriginTravel extends AsyncTask<Void, Void, Travel> {
 
     private Activity activity;
@@ -42,6 +31,7 @@ public class OriginTravel extends AsyncTask<Void, Void, Travel> {
     private String descrizione;
     private Coordinates destinazione;
     private ProgressDialog dialog;
+
     public OriginTravel(Activity activity, User user, String descrizione, Coordinates destinazione){
         this.activity = activity;
         this.user  = user;
@@ -104,8 +94,6 @@ public class OriginTravel extends AsyncTask<Void, Void, Travel> {
         bundle.putSerializable("user", user);
         intent.putExtras(bundle);
         activity.startActivity(intent);
-
-
 
         if (dialog.isShowing()) {
             dialog.dismiss();

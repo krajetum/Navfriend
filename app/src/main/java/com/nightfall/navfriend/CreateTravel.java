@@ -4,6 +4,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.nightfall.navfriend.data.User;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 
 public class CreateTravel extends ActionBarActivity {
@@ -28,35 +30,42 @@ public class CreateTravel extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_travel);
 
-        EditText dest = (EditText) findViewById(R.id.destination_text);
+        final EditText dest = (EditText) findViewById(R.id.destination_text);
         final EditText descr = (EditText) findViewById(R.id.descrizione_text);
 
         Button next = (Button) findViewById(R.id.avanti_button);
         Button back = (Button) findViewById(R.id.indietro_button);
 
-        final User user = (User) getIntent().getSerializableExtra("user");
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> addresses = null;
-        coordinates = null;
-        float latitude;
-        float longitude;
-        try {
-            addresses = geocoder.getFromLocationName(dest.getText().toString(), 1);
-            if (addresses.size() > 0) {
-                latitude = new Float(addresses.get(0).getLatitude());
-                longitude = new Float(addresses.get(0).getLongitude());
-                coordinates = new Coordinates(longitude, latitude);
-            } else {
-                coordinates = new Coordinates(0, 0);
-            }
-        }catch (IOException ex){
-            ex.printStackTrace();
-        }
 
-            next.setOnClickListener(new View.OnClickListener() {
+
+        next.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-                new OriginTravel(CreateTravel.this, user, descr.getText().toString(), coordinates).execute();
+               final User user = (User) getIntent().getSerializableExtra("user");
+               Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+               List<Address> addresses = null;
+               coordinates = null;
+               float latitude;
+               float longitude;
+               try {
+                   Log.i("geodecoded", "Destinazione: "+dest.getText().toString());
+                   addresses = geocoder.getFromLocationName(dest.getText().toString(), 1);
+                   if (addresses != null && addresses.size() > 0) {
+                       Address a = addresses.get(0);
+                       latitude = new Float(a.getLatitude());
+                       longitude = new Float(a.getLongitude());
+                       Log.i("geodecoded", "TROVATO INDIRIZZO: "+latitude + ";"+longitude);
+                       coordinates = new Coordinates(longitude, latitude);
+                   } else {
+                       Log.i("geodecoded", "ERROR");
+                       coordinates = new Coordinates(0, 0);
+                   }
+               }catch (IOException ex){
+                   ex.printStackTrace();
+               }
+
+
+               new OriginTravel(CreateTravel.this, user, descr.getText().toString(), coordinates).execute();
            }
         });
 

@@ -30,7 +30,6 @@ public class FriendSelector extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_selector);
-        Button next=(Button) findViewById(R.id.FriendListSelector_Avanti);
 
         final Travel travel = (Travel) getIntent().getSerializableExtra("travel");
 
@@ -75,16 +74,10 @@ public class FriendSelector extends ActionBarActivity {
                 userTravel.setUser((User) getIntent().getSerializableExtra("user"));
                 new AddUserToTravel(FriendSelector.this).execute(userTravel);
 
+
             }
         });
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent q = new Intent(FriendSelector.this , TestAct.class);
-               startActivity(q);
-            }
-        });
     }
 
 

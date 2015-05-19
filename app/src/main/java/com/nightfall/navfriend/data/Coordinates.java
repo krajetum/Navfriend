@@ -1,5 +1,7 @@
 package com.nightfall.navfriend.data;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 
 /**
@@ -29,6 +31,10 @@ public class Coordinates implements Serializable {
 
     public void setLatitude(float latitude) {
         this.latitude = latitude;
+    }
+
+    public LatLng getLatLng() {
+        return new LatLng(latitude, longitude);
     }
 
 }

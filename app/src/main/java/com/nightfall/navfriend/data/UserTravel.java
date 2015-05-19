@@ -15,8 +15,7 @@ public class UserTravel {
         this.user = user;
     }
 
-    public Travel getTravel() {
-
+    public Travel getTravel(){
         return travel;
     }
 
