@@ -5,15 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.nightfall.navfriend.async.RiceviInviaCordinate;
-import com.nightfall.navfriend.data.Coordinates;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
-import com.nightfall.navfriend.data.trasferCoordinates;
 
 
 public class TestAct extends ActionBarActivity {

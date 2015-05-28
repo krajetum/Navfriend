@@ -1,7 +1,6 @@
 package com.nightfall.navfriend.async;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,10 +9,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nightfall.navfriend.MapNavfriend;
-import com.nightfall.navfriend.TestAct;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
-import com.nightfall.navfriend.data.trasferCoordinates;
 
 import java.io.IOException;
 

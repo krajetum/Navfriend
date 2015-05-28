@@ -1,18 +1,21 @@
 package com.nightfall.navfriend.async;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
-import com.nightfall.navfriend.data.RequestSuccess;
-import com.nightfall.navfriend.data.Travel;
+import com.nightfall.navfriend.data.Coordinates;
 import com.nightfall.navfriend.data.trasferCoordinates;
+import com.nightfall.navfriend.data.Travel;
+import com.nightfall.navfriend.data.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,16 +32,28 @@ import static us.monoid.web.Resty.put;
 /**
  * Created by Dev on 12/05/2015.
  */
-public class RiceviInviaCordinate extends AsyncTask<trasferCoordinates, Void, List<trasferCoordinates>> {
+public class RiceviInviaCordinate extends AsyncTask<Coordinates, Void, List<trasferCoordinates>> {
+    private final User user;
+    private final Travel travel;
+    private final String sessionId;
     Activity activity;
     GoogleMap map;
-    trasferCoordinates position;
-    public RiceviInviaCordinate(Activity activity, GoogleMap map){this.activity=activity;this.map = map;}
+
+    public RiceviInviaCordinate(String id, Activity activity, GoogleMap map, User user, Travel travel){
+        this.sessionId = id;
+        this.activity=activity;
+        this.map = map;
+        this.user = user;
+        this.travel = travel;
+    }
 
     @Override
-    protected List<trasferCoordinates> doInBackground(trasferCoordinates... params) {
-        position = params[0];
-        List<trasferCoordinates> request = new ArrayList<>();
+    protected List<trasferCoordinates> doInBackground(Coordinates... c) {
+        Log.i("ricevi_invia", "partenza...");
+
+        trasferCoordinates position = new trasferCoordinates(c[0], user, travel);
+
+        List<trasferCoordinates> friendsCoordinate = new ArrayList<>();
 
         try {
             Gson gson = new Gson();
@@ -48,13 +63,15 @@ public class RiceviInviaCordinate extends AsyncTask<trasferCoordinates, Void, Li
 
             JSONResource res = resty.json("http://192.168.201.116:8182/getposition", put(content(json)));
             JSONArray array = res.array();
-            for(int i = 0; i<array.length();i++) {
+            for (int i = 0; i < array.length(); i++) {
                 String elem = array.getJSONObject(i).toString();
-                request.add(gson.fromJson(elem, trasferCoordinates.class));
+                friendsCoordinate.add(gson.fromJson(elem, trasferCoordinates.class));
 
             }
 
-            return request;
+            Log.i("ricevi_invia", "restituzione risultati...");
+
+            return friendsCoordinate;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,22 +81,23 @@ public class RiceviInviaCordinate extends AsyncTask<trasferCoordinates, Void, Li
         return null;
     }
 
-    protected void onPostExecute(List<trasferCoordinates> success) {
-        if(success != null){
+    @Override
+    protected void onPostExecute(List<trasferCoordinates> friendsCoordinate) {
 
+        MarkerManager.getInstance().clearMarkers(sessionId);
 
-            Log.println(Log.INFO, "ricevi_invia", "successo");
-            for (trasferCoordinates succes : success) {
+        Log.println(Log.INFO, "ricevi_invia", "onPostExecute - successo");
+        for (trasferCoordinates succes : friendsCoordinate) {
 
-                map.addMarker(  new MarkerOptions()
-                        .title(succes.getUser().getEmail())
-                        .position(succes.getPosition().getLatLng())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            Marker marker = map.addMarker(new MarkerOptions()
+                    .title(succes.getUser().getEmail())
+                    .position(succes.getPosition().getLatLng())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-                Log.println(Log.INFO, "ricevi_invia", succes.getUser().getEmail()+": "+succes.getPosition().getLatitude() + "," + succes.getPosition().getLongitude());
-            }
-        }else{
-            Log.println(Log.INFO, "ricevi_invia", "errore");
+            MarkerManager.getInstance().addMarker(sessionId, marker);
+
+            Log.println(Log.INFO, "ricevi_invia", succes.getUser().getEmail()+": "+succes.getPosition().getLatitude() + "," + succes.getPosition().getLongitude());
         }
+
     }
 }
