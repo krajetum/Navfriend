@@ -1,4 +1,4 @@
-package com.nightfall.navfriend.async;
+package com.nightfall.navfriend.manager;
 
 import android.util.Log;
 

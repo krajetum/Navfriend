@@ -1,6 +1,7 @@
 package com.nightfall.navfriend;
 
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -59,8 +60,10 @@ public class TestAct extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
         }
+
 
         return super.onOptionsItemSelected(item);
     }

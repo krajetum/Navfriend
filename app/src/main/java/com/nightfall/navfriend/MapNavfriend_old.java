@@ -24,7 +24,7 @@ import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
 
 
-public class MapNavfriend extends Activity
+public class MapNavfriend_old extends Activity
         implements OnMapReadyCallback {
 
     private Float longitude;
@@ -60,7 +60,8 @@ public class MapNavfriend extends Activity
         mapFragment.getMapAsync(this);
 
         criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);   //default
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);   //default
+
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -84,28 +85,31 @@ public class MapNavfriend extends Activity
         // location updates: at least 1 meter and 200millsecs change
         locationManager.requestLocationUpdates(provider, 200, 1, mylistener);
 
-        new Thread() {
-            @Override
-            public void run() {
-                while(!isInterrupted())  {
-                    try {
-                        Thread.sleep(2500);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    Location location = locationManager.getLastKnownLocation(provider);
-                    Float lat = new Float(location.getLatitude());
-                    Float lon = new Float(location.getLongitude());
+        
 
-                    new  RiceviInviaCordinate(
-                            mylistener.listenerId,
-                            MapNavfriend.this,
-                            map,
-                            user,
-                            travel).execute(new Coordinates(lat, lon));
-                }
+
+/*
+
+        // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+                setLocation(location);
             }
-        }.start();
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 50, locationListener);
+        */
+
     }
 
 
@@ -157,16 +161,16 @@ public class MapNavfriend extends Activity
 
         @Override
         public void onLocationChanged(Location location) {
-
+            // Initialize the location fields
             latitude = new Float(location.getLatitude());
             longitude = new Float(location.getLongitude());
-
+//            provText.setText(provider + " provider has been selected.");
 
             if(map!=null)
-                new  RiceviInviaCordinate(listenerId, MapNavfriend.this, map, user, travel).execute(new Coordinates(latitude, longitude));
+                new  RiceviInviaCordinate(listenerId, MapNavfriend_old.this, map, user, travel).execute(new Coordinates(latitude, longitude));
 
             Log.i("location_listener", "Location changed! ");
-
+//            Toast.makeText(MapNavfriend.this,  "Location changed!", Toast.LENGTH_SHORT).show();
         }
 
         @Override

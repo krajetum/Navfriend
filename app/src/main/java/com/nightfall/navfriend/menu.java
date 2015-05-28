@@ -63,7 +63,8 @@ public class menu extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nightfall.navfriend.Main;
+import com.nightfall.navfriend.manager.RestServiceManager;
 import com.nightfall.navfriend.menu;
 import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.User;
@@ -56,7 +57,7 @@ public class LogInConnection extends AsyncTask<Void, Void, RequestSuccess>/*impl
             String json = new Gson().toJson(user);
             Log.i("JSON", "effettuando la richiesta..." + json);
             Resty rest=new Resty();
-            JSONResource resource = rest.json("http://192.168.201.116:8182/login", put(content(json)));
+            JSONResource resource = rest.json(RestServiceManager.getInstance().getURI("login"), put(content(json)));
             System.out.println(resource.toObject().toString());
             success = new Gson().fromJson(resource.toObject().toString(), RequestSuccess.class);
 

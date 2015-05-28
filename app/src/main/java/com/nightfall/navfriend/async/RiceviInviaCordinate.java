@@ -1,12 +1,9 @@
 package com.nightfall.navfriend.async;
 
 import android.app.Activity;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
@@ -16,6 +13,8 @@ import com.nightfall.navfriend.data.Coordinates;
 import com.nightfall.navfriend.data.trasferCoordinates;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
+import com.nightfall.navfriend.manager.MarkerManager;
+import com.nightfall.navfriend.manager.RestServiceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class RiceviInviaCordinate extends AsyncTask<Coordinates, Void, List<tras
 
             Resty resty = new Resty();
 
-            JSONResource res = resty.json("http://192.168.201.116:8182/getposition", put(content(json)));
+            JSONResource res = resty.json(RestServiceManager.getInstance().getURI("getposition"), put(content(json)));
             JSONArray array = res.array();
             for (int i = 0; i < array.length(); i++) {
                 String elem = array.getJSONObject(i).toString();

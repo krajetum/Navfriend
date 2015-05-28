@@ -12,6 +12,7 @@ import com.nightfall.navfriend.data.RequestSuccess;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
 import com.nightfall.navfriend.data.UserTravel;
+import com.nightfall.navfriend.manager.RestServiceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class AddUserToTravel extends AsyncTask<UserTravel, Void, RequestSuccess>
 
             Resty resty = new Resty();
 
-            JSONResource res = resty.json("http://192.168.201.116:8182/adduser", put(content(json)));
+            JSONResource res = resty.json(RestServiceManager.getInstance().getURI("adduser"), put(content(json)));
             request = gson.fromJson(res.toObject().toString(), RequestSuccess.class);
 
             return request;

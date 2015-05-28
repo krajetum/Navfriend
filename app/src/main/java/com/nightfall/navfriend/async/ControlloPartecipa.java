@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.nightfall.navfriend.MapNavfriend;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
+import com.nightfall.navfriend.manager.RestServiceManager;
 
 import java.io.IOException;
 
@@ -48,15 +49,13 @@ public class ControlloPartecipa extends AsyncTask<User, Void, Travel> {
         Resty resty = new Resty();
         try {
 
-            JSONResource res = resty.json("http://192.168.201.116:8182/gettravelforuser", put(content(json)));
+            JSONResource res = resty.json(RestServiceManager.getInstance().getURI("gettravelforuser"), put(content(json)));
             if(res==null){
                 return null;
             }else {
                 Travel travel = new Gson().fromJson(res.toObject().toString(), Travel.class);
                 return travel;
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

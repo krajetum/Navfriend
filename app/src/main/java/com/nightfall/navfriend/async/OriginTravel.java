@@ -12,6 +12,7 @@ import com.nightfall.navfriend.data.Coordinates;
 import com.nightfall.navfriend.data.TrasferTravel;
 import com.nightfall.navfriend.data.Travel;
 import com.nightfall.navfriend.data.User;
+import com.nightfall.navfriend.manager.RestServiceManager;
 
 import java.io.IOException;
 
@@ -60,7 +61,7 @@ public class OriginTravel extends AsyncTask<Void, Void, Travel> {
             String json = new Gson().toJson(trasferTravel);
 
             Resty rest=new Resty();
-            JSONResource resource = rest.json("http://192.168.201.116:8182/newtravel", put(content(json)));
+            JSONResource resource = rest.json(RestServiceManager.getInstance().getURI("newtravel"), put(content(json)));
             System.out.println(resource.toObject().toString());
             travel = new Gson().fromJson(resource.toObject().toString(), Travel.class);
 

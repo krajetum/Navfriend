@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.nightfall.navfriend.data.trasferCoordinates;
+import com.nightfall.navfriend.manager.RestServiceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class RiceviInviaCordinate_old extends AsyncTask<trasferCoordinates, Void
 
                 Resty resty = new Resty();
 
-                JSONResource res = resty.json("http://192.168.201.116:8182/getposition", put(content(json)));
+                JSONResource res = resty.json(RestServiceManager.getInstance().getURI("getposition"), put(content(json)));
                 JSONArray array = res.array();
                 for(int i = 0; i<array.length();i++) {
                     String elem = array.getJSONObject(i).toString();
