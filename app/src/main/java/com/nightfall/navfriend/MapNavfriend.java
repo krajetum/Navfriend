@@ -33,7 +33,7 @@ public class MapNavfriend extends Activity
 
     User user;
     Travel travel;
-//    private GoogleApiClient apiClient;
+
     private GoogleMap map;
     private LocationManager locationManager;
     private String provider;
@@ -43,13 +43,6 @@ public class MapNavfriend extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        apiClient = new GoogleApiClient.Builder(this)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(LocationServices.API)
-//                .build();
-
 
         setContentView(R.layout.activity_map_navfriend);
 
@@ -125,28 +118,7 @@ public class MapNavfriend extends Activity
                         .position(dest)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
 
-
-//        apiClient.connect();
     }
-
-/*
-    @Override
-    public void onConnected(Bundle bundle) {
-        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-        if (lastLocation != null) {
-
-              new PositionPollerTask(this, map, apiClient, user, travel).execute();
-
-//            new  RiceviInviaCordinate(this, map, apiClient, user, travel).execute();
-//            new  RiceviInviaCordinate(this, map).execute(
-//                            new trasferCoordinates(
-//                                    new Coordinates(new Float(lastLocation.getLatitude()), new Float(lastLocation.getLongitude())),
-//                                    user,
-//                                    travel));
-
-        }
-    }
-*/
 
     private class MyLocationListener implements LocationListener {
         private String listenerId;
